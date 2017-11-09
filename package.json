@@ -15,7 +15,8 @@
     "parse-server": "~2.2.12"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dashboard":"parse-dashboard --appId myAppID --masterKey myMasterKey --serverURL 'https://jrc-parse-server.herokuapp.com/parse' --appName jrcParseServer"
   },
   "engines": {
     "node": ">=4.3"
