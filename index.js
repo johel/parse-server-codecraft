@@ -1,5 +1,6 @@
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
+var Parse = require('parse/node');
 // var S3Adapter = require('parse-server').S3Adapter;
 var path = require('path');
 
@@ -82,6 +83,26 @@ var port = process.env.PORT || 1337;
 var httpServer = require('http').createServer(app);
 httpServer.listen(port, function () {
 	console.log('parse-server-example running on port ' + port + '.');
+
+	var GameScore = Parse.Object.extend("GameScore");
+	var gameScore = new GameScore();
+
+	gameScore.set("score", 1337);
+	gameScore.set("playerName", "Sean Plott");
+	gameScore.set("cheatMode", false);
+
+	gameScore.save(null, {
+	  success: function(gameScore) {
+	    // Execute any logic that should take place after the object is saved.
+	    alert('New object created with objectId: ' + gameScore.id);
+	  },
+	  error: function(gameScore, error) {
+	    // Execute any logic that should take place if the save fails.
+	    // error is a Parse.Error with an error code and message.
+	    alert('Failed to create new object, with error code: ' + error.message);
+	  }
+	});
+
 });
 
 
